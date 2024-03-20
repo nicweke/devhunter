@@ -17,9 +17,11 @@ import {
     pgTable,
     text,
     primaryKey,
-    integer
+    integer,
+    uuid
 } from "drizzle-orm/pg-core"
 import type { AdapterAccount } from '@auth/core/adapters'
+import { sql } from "drizzle-orm"
 
 export const testing = pgTable("testing", {
     id: text('id').primaryKey().notNull(),
@@ -77,3 +79,22 @@ export const verificationTokens = pgTable(
         compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
     })
 )
+
+
+export const room = pgTable("room", {
+    id: uuid("id")
+        .default(sql`gen_random_uuid()`)
+        .notNull()
+        .primaryKey(),
+    userId: text("userId")
+        .notNull()
+        .references(() => users.id, { onDelete: "cascade" }),
+    name: text("name").notNull(),
+    description: text("description"),
+    language: text("language").notNull(),
+    githubRepo: text("githubRepo"),
+
+})
+
+
+export type Room = typeof room.$inferSelect
