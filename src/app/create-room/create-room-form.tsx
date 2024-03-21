@@ -46,7 +46,7 @@ export function CreateRoomForm() {
   }
 
   return (
-    <div className="">
+    <div className="py-6">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
