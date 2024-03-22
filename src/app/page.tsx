@@ -13,6 +13,8 @@ import {
 import { Room } from "@/db/schema";
 import { GithubIcon } from "lucide-react";
 import { getRooms } from "@/data-access/rooms";
+import { TagsList, splitTags } from "@/components/tags-list";
+import { GitHub } from "@/components/icons";
 
 function RoomCard({ room }: { room: Room }) {
   return (
@@ -25,14 +27,16 @@ function RoomCard({ room }: { room: Room }) {
         {room.githubRepo && (
           <Link
             href={room.githubRepo}
-            className="flex items gap-2"
+            className="flex items gap-2 mb-5"
             target="_blank"
             rel="noopener noreferer"
           >
-            <GithubIcon />
+            <GitHub className="h-6 w-6" />
             Open Project on Github
           </Link>
         )}
+
+        <TagsList tags={splitTags(room.tags)} />
       </CardContent>
       <CardFooter>
         <Button asChild>

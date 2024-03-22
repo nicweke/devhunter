@@ -50,7 +50,8 @@ export function Header() {
   const session = useSession();
   const isLoggedIn = !!session.data;
   return (
-    <header className="bg-gray-50 py-4 container mx-auto dark:bg-gray-900">
+    // <header className="bg-gray-50 py-4 container mx-auto dark:bg-gray-900">
+    <header className="container mx-auto py-5">
       <div className="flex justify-between items-center">
         <Link href="/">
           <div className="text-lg font-semibold">DevHunter.</div>

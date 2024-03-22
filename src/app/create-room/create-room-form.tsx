@@ -21,8 +21,8 @@ import { useRouter } from "next/navigation";
 const formSchema = z.object({
   name: z.string().min(1).max(50),
   description: z.string().min(1).max(250),
-  githubRepo: z.string().min(1).max(50),
-  language: z.string().min(1).max(50),
+  githubRepo: z.string().min(1).max(250),
+  tags: z.string().min(1).max(50),
 });
 
 export function CreateRoomForm() {
@@ -33,7 +33,7 @@ export function CreateRoomForm() {
       name: "",
       description: "",
       githubRepo: "",
-      language: "",
+      tags: "",
     },
   });
 
@@ -56,7 +56,7 @@ export function CreateRoomForm() {
               <FormItem>
                 <FormLabel>Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="shadcn" {...field} />
+                  <Input {...field} placeholder="NextDev Room" />
                 </FormControl>
                 <FormDescription>Enter name of your room...</FormDescription>
                 <FormMessage />
@@ -92,7 +92,10 @@ export function CreateRoomForm() {
               <FormItem>
                 <FormLabel>Github Repository Link</FormLabel>
                 <FormControl>
-                  <Input placeholder="shadcn" {...field} />
+                  <Input
+                    {...field}
+                    placeholder="https://github.com/nicweke/devhunter"
+                  />
                 </FormControl>
                 <FormDescription>
                   Enter the github link to the project you are working on...
@@ -103,15 +106,18 @@ export function CreateRoomForm() {
           />
           <FormField
             control={form.control}
-            name="language"
+            name="tags"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Primary Programming Language</FormLabel>
+                <FormLabel>Tags</FormLabel>
                 <FormControl>
-                  <Input placeholder="shadcn" {...field} />
+                  <Input
+                    {...field}
+                    placeholder="typescirpt, tailwind, next js"
+                  />
                 </FormControl>
                 <FormDescription>
-                  Which primary programming language are you working with...
+                  List your programming languages, frameworks and libraries...
                 </FormDescription>
                 <FormMessage />
               </FormItem>
