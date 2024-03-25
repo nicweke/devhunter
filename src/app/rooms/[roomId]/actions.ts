@@ -1,6 +1,6 @@
-"use server"
+"use server";
 
-import { getSession } from "next-auth/react";
+import { getSession } from "@/lib/auth";
 import { StreamChat } from "stream-chat";
 
 export async function generateTokenAction() {

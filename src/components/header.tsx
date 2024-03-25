@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LogIn, LogOut } from "lucide-react";
+import { LogIn, LogInIcon, LogOut } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 
@@ -30,17 +30,16 @@ function AccountDropdown() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        {isLoggedIn ? (
-          <DropdownMenuItem onClick={() => signOut()}>
-            <LogOut className="h-4 w-4 mr-2" />
-            Sign Out
-          </DropdownMenuItem>
-        ) : (
-          <DropdownMenuItem onClick={() => signIn("google")}>
-            <LogIn className="h-4 w-4 mr-2" />
-            Sign In
-          </DropdownMenuItem>
-        )}
+        <DropdownMenuItem
+          onClick={() =>
+            signOut({
+              callbackUrl: "/",
+            })
+          }
+        >
+          <LogOut className="h-4 w-4 mr-2" />
+          Sign Out
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -58,8 +57,13 @@ export function Header() {
         </Link>
 
         <div className="flex justify-between items-center gap-x-3">
-          <AccountDropdown />
+          {isLoggedIn && <AccountDropdown />}
 
+          {!isLoggedIn && (
+            <Button onClick={() => signIn()} variant="ghost">
+              <LogInIcon className="mr-2" /> Sign In
+            </Button>
+          )}
           <ThemeToggle />
         </div>
       </div>
