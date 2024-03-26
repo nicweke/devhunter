@@ -50,11 +50,25 @@ export function Header() {
   const isLoggedIn = !!session.data;
   return (
     // <header className="bg-gray-50 py-4 container mx-auto dark:bg-gray-900">
-    <header className="container mx-auto py-5">
+    <header className="container mx-auto py-5 z-10 relative">
       <div className="flex justify-between items-center">
         <Link href="/">
           <div className="text-lg font-semibold">DevHunter.</div>
         </Link>
+
+        <nav className="flex gap-8">
+          {isLoggedIn && (
+            <>
+              <Link className="hover:underline" href="/browse">
+                Browse Rooms
+              </Link>
+
+              <Link className="hover:underline" href="/your-rooms">
+                Your Rooms
+              </Link>
+            </>
+          )}
+        </nav>
 
         <div className="flex justify-between items-center gap-x-3">
           {isLoggedIn && <AccountDropdown />}

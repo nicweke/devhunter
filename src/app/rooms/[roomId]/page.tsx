@@ -6,6 +6,7 @@ import { GithubIcon } from "lucide-react";
 import Link from "next/link";
 import { DevHunterVideo } from "./video-player";
 import { splitTags } from "@/lib/utils";
+import { unstable_noStore } from "next/cache";
 
 export default async function RoomPage(props: { params: { roomId: string } }) {
   const roomId = props.params.roomId;
@@ -14,6 +15,7 @@ export default async function RoomPage(props: { params: { roomId: string } }) {
     return <div>No room of this ID found</div>;
   }
 
+  unstable_noStore;
   //const tags = splitTags(room.tags);
 
   return (
