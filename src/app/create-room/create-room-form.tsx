@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { createRoomAction } from "./actions";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   name: z.string().min(1).max(50),
@@ -26,6 +27,7 @@ const formSchema = z.object({
 });
 
 export function CreateRoomForm() {
+  const { toast } = useToast();
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -40,9 +42,12 @@ export function CreateRoomForm() {
   const router = useRouter();
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    //invoke server action to store the data in our database
-    await createRoomAction(values);
-    return router.push("/");
+    const room = await createRoomAction(values);
+    toast({
+      title: "Room Created",
+      description: "Your room was successfully created",
+    });
+    router.push(`/rooms/${room.id}`);
   }
 
   return (

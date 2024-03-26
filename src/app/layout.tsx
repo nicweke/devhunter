@@ -1,19 +1,10 @@
 import type { Metadata } from "next";
-import {
-  Alata,
-  DM_Sans,
-  DM_Serif_Display,
-  Gentium_Plus,
-  Inter,
-  Neuton,
-  Outfit,
-  Sen,
-} from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { Providers } from "./provider";
 import NextTopLoader from "nextjs-toploader";
 import { Header } from "@/components/header";
+import { Toaster } from "@/components/ui/toaster";
 
 const font = Outfit({ weight: "400", subsets: ["latin"] });
 
@@ -36,6 +27,7 @@ export default function RootLayout({
           <Header />
           <div className="container mx-auto">{children}</div>
         </Providers>
+        <Toaster />
       </body>
     </html>
   );
